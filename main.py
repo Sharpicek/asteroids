@@ -10,13 +10,12 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
-    # Screen settings
+    # Game start settings
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-
-    # Game clock settings
     game_clock = pygame.time.Clock()
     dt = 0
+
     # Infinite Game Loop
     while True:
         log_state()
@@ -27,6 +26,7 @@ def main():
         
         screen.fill("black")
         player.draw(screen)
+        player.update(dt)
         pygame.display.flip()
 
         # Limit FPS to 60
