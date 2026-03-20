@@ -6,6 +6,7 @@ from constants import (
     PLAYER_SPEED, 
     PLAYER_SHOOT_SPEED,
     PLAYER_SHOOT_COOLDOWN_SECONDS,
+    ASTEROID_MIN_RADIUS,
     )
 from circleshape import CircleShape
 from shot import Shot
@@ -15,6 +16,7 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.shot_cooldown_timer = 0
+        self.score = 0
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -59,3 +61,11 @@ class Player(CircleShape):
         if keys[pygame.K_SPACE]:
             self.shoot()
 
+    def add_shoot_score(self, asteroid_radius):
+        asteroid_size = asteroid_radius // ASTEROID_MIN_RADIUS
+        score = 10
+        if asteroid_size == 1:
+            score = 100
+        elif asteroid_size == 2:
+            score = 50
+        self.score += score
